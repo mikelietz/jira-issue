@@ -11,7 +11,7 @@ function Jira_Issue(parentNerdie) {
 }
 
 Jira_Issue.prototype.init = function () {
-	var pattern = RegExp( "^(" + config.prefix + "-|-)([1-9]|[1-9][0-9]|[1-9][0-9][0-9])$" );
+	var pattern = RegExp( "^(" + config.prefix + "-|-)(\\d+)$" );
 	this.pluginInterface.registerPattern( pattern,
 		this.jira_issue
 	);
