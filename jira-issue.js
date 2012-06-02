@@ -42,14 +42,20 @@ Jira_Issue.prototype.jira_issue = function(msg) {
 //			process.stdout.write(d);
 			try {
 				var parsed_data = JSON.parse( d );
+				if ( parsed_data.fields ) {
 // console.log( parsed_data.fields );
 // console.log( parsed_data.fields );
 // console.log( "=============================================");
 // console.log( parsed_data.fields.summary);
 // console.log( parsed_data["status"] );
-				msg.say( issue + " Status: " + parsed_data.fields.status.value.name  );
-				msg.say( "Summary: " + parsed_data.fields.summary.value );
-				msg.say( "Issue URL: " + issue_url + " API URL: " + parsed_data.self );
+					msg.say( issue + " Status: " + parsed_data.fields.status.value.name  );
+					msg.say( "Summary: " + parsed_data.fields.summary.value );
+					msg.say( "Issue URL: " + issue_url + " API URL: " + parsed_data.self );
+				}
+				else if ( parsed_data.errorMessages ) {
+// console.log( parsed_data.errorMessages[0] );
+					msg.say( parsed_data.errorMessages[0] );
+				}
 			} catch (e) {
 				msg.say( "Could not parse response." );
 				return;
