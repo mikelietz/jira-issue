@@ -41,9 +41,9 @@ Jira_Issue.prototype.jira_issue = function(msg) {
 		res.on('data', function(d) {
 //			process.stdout.write(d);
 			try {
+
 				var parsed_data = JSON.parse( d );
 				if ( parsed_data.fields ) {
-// console.log( parsed_data.fields );
 // console.log( parsed_data.fields );
 // console.log( "=============================================");
 // console.log( parsed_data.fields.summary);
@@ -57,7 +57,7 @@ Jira_Issue.prototype.jira_issue = function(msg) {
 					msg.say( parsed_data.errorMessages[0] );
 				}
 			} catch (e) {
-				msg.say( "Could not parse response." );
+				msg.say( "Could not parse response. You might try " + issue_url );
 				return;
 			}
 		});
