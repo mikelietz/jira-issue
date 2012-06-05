@@ -38,11 +38,15 @@ Jira_Issue.prototype.jira_issue = function(msg) {
 //		console.log("statusCode: ", res.statusCode);
 //		console.log("headers: ", res.headers);
 
-		res.on('data', function(d) {
-//			process.stdout.write(d);
-			try {
+		var data = '';
+		res.on('data', function( chunk ) {
+			data += chunk;
+		});
 
-				var parsed_data = JSON.parse( d );
+		res.on('end', function() {
+//			process.stdout.write(data);
+			try {
+				var parsed_data = JSON.parse( data );
 				if ( parsed_data.fields ) {
 // console.log( parsed_data.fields );
 // console.log( "=============================================");
